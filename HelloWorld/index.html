@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Greeting Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    function welcomeUser() {
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value;
+      if (firstName && lastName) {
+        document.getElementById("welcome").innerText = 
+          "Welcome, " + firstName + " " + lastName + "!";
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1 class="greeting">Hello!</h1>
+
+  <div>
+    <label for="firstName">Enter your first name:</label>
+    <input type="text" id="firstName" name="firstName"><br><br>
+
+    <label for="lastName">Enter your last name:</label>
+    <input type="text" id="lastName" name="lastName"><br><br>
+
+    <button onclick="welcomeUser()">Submit</button>
+  </div>
+
+  <h2 id="welcome" class="welcome-text"></h2>
+</body>
+</html>

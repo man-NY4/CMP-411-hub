@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Bread Survey</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); // prevent default submit
+
+      const frequency = document.querySelector("input[name='frequency']:checked");
+      const breadTypes = document.querySelectorAll("input[name='bread_type']:checked");
+
+      if (!frequency) {
+        alert("Please select how often you consume bread.");
+        return false;
+      }
+
+      if (breadTypes.length === 0) {
+        alert("Please select at least one type of bread you like.");
+        return false;
+      }
+
+      alert("Form submitted successfully!");
+      return true;
+    }
+  </script>
+</head>
+
+<body>
+  <h2>🍞🍞Bread Emporium Survey🍞🍞</h2>
+
+  <form onsubmit="return validateForm(event)" method="POST">
+
+    <!-- Text Boxes -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <!-- Dropdown Menu -->
+    <label for="purchase_location">Where do you get your bread?:</label>
+    <select id="purchase_location" name="purchase_location" required>
+      <option value="">Select</option>
+      <option value="bakery">Bakery</option>
+      <option value="supermarket">Supermarket</option>
+      <option value="farmers_market">Farmers Market</option>
+      <option value="online">Online</option>
+      <option value="homemade">Homemade</option>
+    </select><br><br>
+
+    <!-- Radio Buttons -->
+    <p>How often do you consume bread?</p>
+    <input type="radio" id="daily" name="frequency" value="daily">
+    <label for="daily">Daily</label><br>
+
+    <input type="radio" id="a_couple_times_a_week" name="frequency" value="several_times_a_week">
+    <label for="a_couple_times_a_week">A couple times a week</label><br>
+
+    <input type="radio" id="weekly" name="frequency" value="weekly">
+    <label for="weekly">Weekly</label><br>
+
+    <input type="radio" id="monthly" name="frequency" value="monthly">
+    <label for="monthly">Monthly</label><br>
+
+    <input type="radio" id="rarely" name="frequency" value="rarely">
+    <label for="rarely">Rarely</label><br><br>
+
+    <!-- Checkboxes -->
+    <p>What types of bread do you like? (Select all that apply)</p>
+    <input type="checkbox" id="sourdough" name="bread_type" value="sourdough">
+    <label for="sourdough">Sourdough</label><br>
+
+    <input type="checkbox" id="whole_wheat" name="bread_type" value="whole_wheat">
+    <label for="whole_wheat">Whole Wheat</label><br>
+
+    <input type="checkbox" id="rye" name="bread_type" value="rye">
+    <label for="rye">Rye</label><br>
+
+    <input type="checkbox" id="baguette" name="bread_type" value="baguette">
+    <label for="baguette">Baguette</label><br>
+
+    <input type="checkbox" id="ciabatta" name="bread_type" value="ciabatta">
+    <label for="ciabatta">Ciabatta</label><br>
+
+    <input type="checkbox" id="brioche" name="bread_type" value="brioche">
+    <label for="brioche">Brioche</label><br>
+
+    <input type="checkbox" id="white_bread" name="bread_type" value="white_bread">
+    <label for="white_bread">White Bread</label><br>
+
+    <input type="checkbox" id="multigrain" name="bread_type" value="multigrain">
+    <label for="multigrain">Multigrain</label><br>
+
+    <input type="checkbox" id="cornbread" name="bread_type" value="cornbread">
+    <label for="cornbread">Cornbread</label><br>
+
+    <input type="checkbox" id="telera" name="bread_type" value="telera">
+    <label for="telera">Telera</label><br>
+
+    <input type="checkbox" id="flatbread" name="bread_type" value="flatbread">
+    <label for="flatbread">Flatbread</label><br>
+
+    <input type="checkbox" id="bread_roll" name="bread_type" value="bread_roll">
+    <label for="bread_roll">Bread Roll</label><br>
+
+    <input type="checkbox" id="gluten_free" name="bread_type" value="gluten_free">
+    <label for="gluten_free">Gluten-Free</label><br><br>
+
+    <!-- Text Again -->
+    <label for="comments">Additional Comments:</label><br>
+    <textarea id="comments" name="comments" rows="4" cols="50" required></textarea><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+
+</html>
