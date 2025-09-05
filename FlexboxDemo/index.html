@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Responsive Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Responsive Flexbox Example</h1>
+  
+  <div class="flex-container">
+    <!-- Cell 1: Link -->
+    <div class="cell">
+      <h2>Hyperlink</h2>
+      <p>Visit <a href="https://github.com/man-NY4" target="_blank">Github.com</a></p>
+    </div>
+
+    <!-- Cell 2: Image (local file, responsive) -->
+    <div class="cell">
+      <h2>Image</h2>
+      <img src="ballin-jelly.png" alt="Image of Jellyfish basketballing" class="responsive-media">
+    </div>
+
+    <!-- Cell 3: Video (local file, responsive) -->
+    <div class="cell">
+      <h2>Video</h2>
+      <video controls class="responsive-media" poster="myimage.jpg">
+        <source src="car-flip.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Cell 4: Geolocation -->
+    <div class="cell">
+      <h2>Geolocation</h2>
+      <button onclick="getLocation()">Get My Location Coordinates</button>
+      <p id="locationOutput">Coordinates will appear here.</p>
+    </div>
+  </div>
+
+  <script>
+    function getLocation() {
+      const output = document.getElementById("locationOutput");
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            output.textContent = 
+              "Latitude: " + position.coords.latitude + 
+              ", Longitude: " + position.coords.longitude;
+          },
+          (error) => {
+            output.textContent = "Error: " + error.message;
+          }
+        );
+      } else {
+        output.textContent = "Geolocation is not supported by this browser.";
+      }
+    }
+  </script>
+</body>
+</html>
