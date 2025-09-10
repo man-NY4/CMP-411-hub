@@ -1,0 +1,99 @@
+/* Basic reset and typography */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  line-height: 1.4;
+  padding: 16px;
+  background: #8f109a;
+  color: #111;
+}
+
+/* Generic flex helper and visual cell styling */
+.flex { 
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 16px; 
+    justify-content: center; 
+}
+.cell {
+  border: 2px dashed #d0d0d0;
+  padding: 16px;
+  border-radius: 8px;
+  flex: 1 1 200px;
+  background: #d6af39;
+}
+
+/* Top bar: logo left, nav right */
+.top-bar { justify-content: space-between; margin-bottom: 16px; align-items: center; }
+.logo { flex: 0 0 220px; }
+.top-actions { display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
+
+/* Simple link appearance for placeholders */
+.top-actions .nav-link,
+.contact-link {
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+/* Content area: 4 cells; tagline spans full width */
+.content-area { flex-wrap: wrap; margin-bottom: 16px; }
+.content-area .cell { flex: 1 1 220px; min-width: 200px; }
+.tagline { flex-basis: 50%; display: flex; flex-direction: column; justify-content: center; }
+
+
+/* Bottom bar */
+.bottom-bar { justify-content: space-between; align-items: flex-start; }
+.map-placeholder {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  border-radius: 6px;
+}
+
+/* Accessibility helper if you later want off-screen text */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; border: 0; padding: 0; margin: -1px;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 993px) {
+  .top-bar, .bottom-bar { flex-direction: row; align-items: stretch; }
+  .logo { flex: none; width: auto; }
+  .top-actions { justify-content: flex-start; }
+  .content-area .cell { flex: 1 1 100%; }
+}
+
+/* Medium screens: 2x2 grid */
+@media (max-width: 992px) and (min-width: 601px) {
+  .content-area {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .cell { 
+    flex: 1 1 45%; 
+  }
+}
+
+/* Narrow screens: single column */
+@media (max-width: 600px) {
+  .content-area {
+    flex-direction: column;
+  }
+  
+  .cell { 
+    width: 100%;
+    max-width: 500px;
+  }
+}
