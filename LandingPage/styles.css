@@ -29,15 +29,25 @@ body {
 .logo { flex: 0 0 220px; }
 .top-actions { display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
 
-/* Simple link appearance for placeholders */
-.top-actions .nav-link,
-.contact-link {
+/* Top actions: icons with labels */
+.top-actions .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   text-decoration: none;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid transparent;
   font-weight: 600;
+  color: #111;
+  transition: background 0.2s ease, color 0.2s ease;
 }
+
+.top-actions .nav-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #000;
+}
+
 
 /* Content area: 4 cells; tagline spans full width */
 .content-area { flex-wrap: wrap; margin-bottom: 16px; }
