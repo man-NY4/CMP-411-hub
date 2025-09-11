@@ -50,8 +50,23 @@ body {
 
 
 /* Content area: 4 cells; tagline spans full width */
-.content-area { flex-wrap: wrap; margin-bottom: 16px; }
-.content-area .cell { flex: 1 1 220px; min-width: 200px; }
+.content-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+/* Cells in content area */
+.content-area .cell {
+  border: 2px dashed #d0d0d0;
+  padding: 16px;
+  border-radius: 8px;
+  background: #d6af39;
+  text-align: center;
+  flex: 1 1 200px;   /* flexible sizing */
+  min-width: 200px; /* prevents them from stretching too wide */
+}
 .tagline { flex-basis: 50%; display: flex; flex-direction: column; justify-content: center; }
 
 
@@ -69,10 +84,10 @@ body {
 
 /* Make images and videos responsive */
 .responsive-media {
-  width: 100%;
+  max-width: 100%;
   height: auto;
-  display: block;
-  border-radius: 6px;
+  display: block ;
+  border-radius: 5px;
 }
 
 
@@ -85,33 +100,31 @@ body {
 }
 
 /* Responsive breakpoints */
-@media (max-width: 993px) {
-  .top-bar, .bottom-bar { flex-direction: row; align-items: stretch; }
-  .logo { flex: none; width: auto; }
-  .top-actions { justify-content: flex-start; }
-  .content-area .cell { flex: 1 1 100%; }
-}
-
-/* Medium screens: 2x2 grid */
-@media (max-width: 992px) and (min-width: 601px) {
+/* Large screens: 4 in one row */
+@media (min-width: 993px) {
   .content-area {
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .cell { 
-    flex: 1 1 45%; 
   }
 }
 
-/* Narrow screens: single column */
+/* Medium screens: 2 columns */
+@media (max-width: 992px) and (min-width: 601px) {
+  .content-area {
+    justify-content: center;
+  }
+  .content-area .cell {
+    flex: 1 1 45%;
+  }
+}
+
+/* Small screens: single column */
 @media (max-width: 600px) {
   .content-area {
     flex-direction: column;
+    align-items: center;
   }
-  
-  .cell { 
+  .content-area .cell {
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
   }
 }
