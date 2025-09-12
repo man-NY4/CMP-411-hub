@@ -190,3 +190,17 @@ body {
   border: none;
   border-radius: 8px;
 }
+
+.clock-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  stroke: #333; /* adjust color if needed */
+}
+#site-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#site-logo h1 {
+  margin: 0;
+}
