@@ -16,12 +16,13 @@ body {
     gap: 16px; 
     justify-content: center; 
 }
+
 .cell {
-  border: 2px dashed #d0d0d0;
   padding: 16px;
   border-radius: 8px;
   flex: 1 1 200px;
   background: #d6af39;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* subtle depth */
 }
 
 /* Top bar: logo left, nav right */
@@ -128,3 +129,57 @@ body {
     max-width: 400px;
   }
 }
+
+/* Button-like links */
+.btn-link {
+  display: inline-block;
+  background-color: #6a0dad; /* purple */
+  color: #fff;
+  padding: 5px 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  background-color: #520a99; /* darker purple */
+  transform: translateY(-4px);
+}
+
+.btn-link:active {
+  background-color: #400877;
+  transform: translateY(0);
+}
+
+/* Make images act like buttons */
+.img-link {
+  display: inline-block;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.img-link img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  opacity: 0.75; /* slightly faded by default */
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.img-link:hover img,
+.img-link:focus img {
+  opacity: 1; /* fully visible on hover */
+  transform: scale(1.03); /* subtle zoom effect */
+}
+
+.img-link:active img {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
