@@ -24,33 +24,6 @@ h1 {
   max-width: 300px;
 }
 
-/* Make images & videos responsive */
-.responsive-media {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-/* Tooltip effect for image alt text */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip img:hover::after {
-  content: attr(alt);
-  position: absolute;
-  bottom: -30px; /* shows below image */
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  padding: 5px 8px;
-  border-radius: 5px;
-  white-space: nowrap;
-  font-size: 0.9rem;
-}
-
 /* Large screens: 4 in one row */
 @media (min-width: 993px) {
   .flex-container {
