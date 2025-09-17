@@ -10,22 +10,34 @@
   <h1>List Builder</h1>
   
   <div class="flex-container">
-    <!-- Cell 1: Link -->
+    <!-- Cell 1: Form -->
     <div class="cell">
       <h2>Form to get a word and put in lists</h2>
         <p>Placeholder</p>
+        <form>
+          <label for="wordInput">Enter a word:</label>
+          <input type="text" id="wordInput" name="wordInput" required>
+          <br><br>
+          <input type="radio" id="list1" name="listChoice" value="list1" checked>
+          <label for="list1">List 1</label>
+          <input type="radio" id="list2" name="listChoice" value="list2">
+          <label for="list2">List 2</label>
+          <br><br>
+          <button type="submit">Add to List</button>
     </div>
 
-    <!-- Cell 2: Image (local file, responsive) -->
+    <!-- Cell 2: List 1 -->
     <div class="cell">
       <h2>List 1</h2>
-        <p>Placeholder</p>
+        <ul id="list1Items">
+          <li>Placeholder</li>
     </div>
 
-    <!-- Cell 3: Video (local file, responsive) -->
+    <!-- Cell 3: List 2 -->
     <div class="cell">
       <h2>List 2</h2>
-        <p>Placeholder</p>
+        <ul id="list2Items">
+          <li>Placeholder</li>
     </div>
 </body>
 </html>
