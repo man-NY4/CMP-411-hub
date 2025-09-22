@@ -14,4 +14,3 @@ function clearList(listId) {
     listElement = document.getElementById(listId);
     listElement.innerHTML = '';
 }
-
