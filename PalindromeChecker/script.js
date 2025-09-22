@@ -1,5 +1,9 @@
 function addItemToList() {
     item = document.getElementById('wordInput').value;
+    if (item === "") {
+        alert("Input cannot be empty");
+        return;
+    }  
     if (document.getElementsByName('listChoice')[0].checked) {
         listElement = document.getElementById('list1Items');
     } if (document.getElementsByName('listChoice')[1].checked) {
@@ -16,3 +20,14 @@ function clearList(listId) {
     listElement = document.getElementById(listId);
     listElement.innerHTML = '';
 }
+
+function isPalindrome1(str) {
+    const normal = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+    const reversed = normal.split('').reverse().join('');
+    return normal === reversed;
+}
+
+function isPalindrome2(str) {}
+
+function isPalindrome3(str) {}
+
