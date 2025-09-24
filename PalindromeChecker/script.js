@@ -14,7 +14,7 @@ function addItemToList() {
     } if (document.getElementsByName('listChoice')[1].checked) { // list2
         listElement = document.getElementById('list2Items');
         newItem = document.createElement("li");
-        newItem.textContent = item;
+        newItem.textContent = item + (": " + isPalindrome2(item));
         listElement.appendChild(newItem);
     } if (document.getElementsByName('listChoice')[2].checked) { // list3
         listElement = document.getElementById('list3Items');
@@ -48,11 +48,26 @@ function isPalindrome2(str) {
         str = str.toLowerCase();
     } // case sensitive
    
+    left = 0;
+    right = str.length - 1;
+    while (left < right) {
+        if (str[left] != str[right]) {
+            return false;
+        }
+        left += 1;
+        right -= 1;
+    }
+    return true;
 } // algorithm 2
 
 function isPalindrome3(str) {
-    
+    if (document.getElementsByName('caseSensitive')[0].checked) {
+        str = str;
+    } else {
+        str = str.toLowerCase();
+    } // case sensitive
    
+    
 } // algorithm 3
 
 function sanitize(string) {
