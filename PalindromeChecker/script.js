@@ -1,5 +1,6 @@
 function addItemToList() {
     item = document.getElementById('wordInput').value;
+    item = sanitize(item.trim());
     if (item === "") {
         alert("Input cannot be empty");
         return;
@@ -22,7 +23,7 @@ function clearList(listId) {
 }
 
 function isPalindrome1(str) {
-    const normal = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+    const normal = str.replace(/[^A-Za-z0-9]/g, '');
     const reversed = normal.split('').reverse().join('');
     return normal === reversed;
 }
@@ -31,3 +32,15 @@ function isPalindrome2(str) {}
 
 function isPalindrome3(str) {}
 
+function sanitize(string) {
+  const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      "/": '&#x2F;',
+  };
+  const reg = /[&<>"'/]/ig;
+  return string.replace(reg, (match)=>(map[match]));
+}
