@@ -19,7 +19,7 @@ function addItemToList() {
     } if (document.getElementsByName('listChoice')[2].checked) { // list3
         listElement = document.getElementById('list3Items');
         newItem = document.createElement("li");
-        newItem.textContent = item;
+        newItem.textContent = item + (": " + isPalindrome3(item));
         listElement.appendChild(newItem);
     }
 } // add item to the selected list
@@ -29,25 +29,25 @@ function clearList(listId) {
     listElement.innerHTML = '';
 } // clear the selected list
 
-function isPalindrome1(str) {
+function isPalindrome1(str) { // self made algo
     if (document.getElementsByName('caseSensitive')[0].checked) {
         str = str;
     } else {
         str = str.toLowerCase();
     } // case sensitive
     
-    const normal = str.replace(/[^A-Za-z0-9]/g, '');
-    const reversed = normal.split('').reverse().join('');
-    return normal === reversed;
+    str = str.replace(/[^A-Za-z0-9]/g, '');
+    const reversed = str.split('').reverse().join('');
+    return str === reversed;
 } // algorithm 1
 
-function isPalindrome2(str) {
+function isPalindrome2(str) { // google/stack overflow algo
     if (document.getElementsByName('caseSensitive')[0].checked) {
         str = str;
     } else {
         str = str.toLowerCase();
     } // case sensitive
-   
+    str = str.replace(/[^A-Za-z0-9]/g, '');
     left = 0;
     right = str.length - 1;
     while (left < right) {
@@ -60,14 +60,27 @@ function isPalindrome2(str) {
     return true;
 } // algorithm 2
 
-function isPalindrome3(str) {
+function isPalindrome3(str) { // AI algo
     if (document.getElementsByName('caseSensitive')[0].checked) {
         str = str;
     } else {
         str = str.toLowerCase();
     } // case sensitive
    
-    
+     str = str.replace(/[^A-Za-z0-9]/g, '');
+
+    // Recursive helper function
+    function checkRecursive(left, right) {
+        if (left >= right) {
+            return true; // base case: middle reached
+        }
+        if (str[left] !== str[right]) {
+            return false; // mismatch
+        }
+        return checkRecursive(left + 1, right - 1); // recursive step
+    }
+
+    return checkRecursive(0, str.length - 1);   
 } // algorithm 3
 
 function sanitize(string) {
