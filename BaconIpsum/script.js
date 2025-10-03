@@ -4,11 +4,9 @@ async function fetchMeat() {
     let newPara = "";
 
     let meatData = await fetch(meatLink);
-
     let meatJSON = await meatData.json();
 
     document.getElementById("rawMeat").innerHTML = JSON.stringify(meatJSON);
-
     for (para in meatJSON) {
         newPara += '<p>' + meatJSON[para] + '</p>';
         document.getElementById("formattedMeat").innerHTML = newPara;
