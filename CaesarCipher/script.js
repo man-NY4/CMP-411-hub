@@ -1,7 +1,13 @@
 async function fetchMeat() {
-    let meatPara = document.getElementById("meatInput").value; // how much meat
-    let meatLink = "https://baconipsum.com/api/?type=all-meat&paras=" + meatPara; // get the api link
-    let newPara = ""; // make a placeholder para
+    let meatFiller = document.getElementById("fillerInput").value; // filler or no filler
+    let meatAmount = document.getElementById("meatInput").value; // how much meat
+
+    meatFiller = "?type=" + meatFiller;
+    meatAmount = "&paras=" + meatAmount;
+    // code above gets the filler and number into format to make it easier for later
+
+    let meatLink = "https://baconipsum.com/api/" + meatFiller + meatAmount; // get the api link
+    let newPara = ""; // make a placeholder para for the loop to get the para formatted
 
     let meatData = await fetch(meatLink); // fetch call
     let meatJSON = await meatData.json(); // make meat JSON
@@ -13,4 +19,12 @@ async function fetchMeat() {
     }
 
     return true; // just in case
+}
+
+function algo1() {
+    
+}
+
+function algo2() {
+
 }
