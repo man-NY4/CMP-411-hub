@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bacon Ipsum API Example</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <h1>API test with Bacon Ipsum</h1>
+  
+  <div class="flex-container">
+    <!-- Cell 1: Form -->
+    <div class="cell">
+      <h2>Form to get meat</h2>
+        <form id ="meatForm">
+          <label for="wordInput">How much meat:</label>
+          <select id = "meatInput" name = "meatInput">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <br><br>
+
+          <input type="button" value="Fetch the meat" onclick="fetchMeat()">
+        </form>
+    </div>
+
+    <!-- Cell 2: List 1 -->
+    <div class="cell">
+      <h2>Raw JSON</h2>
+        <p id = "rawMeat">
+        </p>
+    </div>
+
+    <!-- Cell 3: List 2 -->
+    <div class="cell">
+      <h2>Paragraph Format</h2>
+        <p id = "formattedMeat"> 
+        </p>
+    </div>
+
+</body>
+</html>
