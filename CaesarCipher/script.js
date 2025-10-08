@@ -21,8 +21,22 @@ async function fetchMeat() {
     return true; // just in case
 }
 
-function algo1() {
-    
+function algo1() { //atbash cipher (basically reverses the alphabet)
+    const reverseAlpha = new Map();
+
+    for (let i = 0; i < 26; i++) { // goes through lowercase ASCII values and puts them into the map as key value pairs
+        const lower = String.fromCharCode(97 + i);
+        const reverseLower = String.fromCharCode(122 - i);
+        reverseAlpha.set(lower, reverseLower);
+    } // lowercase for loop
+
+    for (let i = 0; i < 26; i++) { // same as upper case but for uppercase letters instead
+        const upper = String.fromCharCode(65 + i);     
+        const reverseUpper = String.fromCharCode(90 - i);
+        reverseAlpha.set(upper, reverseUpper);
+    } // uppercase for loop
+
+
 }
 
 function algo2() {
