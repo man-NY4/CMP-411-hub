@@ -2,9 +2,9 @@ async function fetchMeat() {
     let meatFiller = document.getElementById("fillerInput").value; // filler or no filler
     let meatAmount = document.getElementById("meatInput").value; // how much meat
 
+    // gets the filler and number into format to make it easier for later    
     meatFiller = "?type=" + meatFiller;
     meatAmount = "&paras=" + meatAmount;
-    // code above gets the filler and number into format to make it easier for later
 
     let meatLink = "https://baconipsum.com/api/" + meatFiller + meatAmount; // get the api link
     let newPara = ""; // make a placeholder para for the loop to get the para formatted
@@ -12,33 +12,63 @@ async function fetchMeat() {
     let meatData = await fetch(meatLink); // fetch call
     let meatJSON = await meatData.json(); // make meat JSON
 
-    document.getElementById("rawMeat").innerHTML = JSON.stringify(meatJSON); // stringify so that the meat shows up in JSON format in rawMEAT
-    for (para in meatJSON) { // para indexes for some reason
-        newPara += '<p>' + meatJSON[para] + '</p>'; // append or add meat JSON to a placeholder paragraph
-        document.getElementById("formattedMeat").innerHTML = newPara; // actually add it to the formattedMeat paragraph
+    // raw JSON format in rawMEAT
+    document.getElementById("rawMeat").innerHTML = JSON.stringify(meatJSON); 
+    
+    // add to formatted meat
+    for (para in meatJSON) {
+        newPara += '<p>' + meatJSON[para] + '</p>';
     }
+    document.getElementById("formattedMeat").innerHTML = newPara;
+
+    // add to algo1 encryption para
+    let algo1Para = "";
+    for (para in meatJSON) {
+        algo1Para += '<p>' + meatJSON[para] + '</p>';
+    }
+    let cipher1Para = algo1(algo1Para);
+    document.getElementById("algo1").innerHTML = cipher1Para;
+
+    let algo2Para = "";
+    for(para in meatJSON) {
+        algo2Para += "<p>" + meatJSON[para] + '</p>';
+    }
+    let cipher2Para = algo2(algo2Para);
+    document.getElementById("algo2").innerHTML = cipher2Para;
 
     return true; // just in case
 }
 
-function algo1() { //atbash cipher (basically reverses the alphabet)
-    const reverseAlpha = new Map();
+//atbash cipher (basically reverses the alphabet)
+function algo1(str) { 
+    const reverseAlpha = {};
+    
+    // chatgpt made the for loop code below for reversing
 
-    for (let i = 0; i < 26; i++) { // goes through lowercase ASCII values and puts them into the map as key value pairs
+    // goes through lowercase ASCII values and reverses them
+    for (let i = 0; i < 26; i++) {
         const lower = String.fromCharCode(97 + i);
         const reverseLower = String.fromCharCode(122 - i);
-        reverseAlpha.set(lower, reverseLower);
-    } // lowercase for loop
+        reverseAlpha[lower] = reverseLower;
+    } 
 
-    for (let i = 0; i < 26; i++) { // same as upper case but for uppercase letters instead
+    // same as upper case but for uppercase letters instead
+    for (let i = 0; i < 26; i++) { 
         const upper = String.fromCharCode(65 + i);     
         const reverseUpper = String.fromCharCode(90 - i);
-        reverseAlpha.set(upper, reverseUpper);
-    } // uppercase for loop
+        reverseAlpha[upper] = reverseUpper;
+    }
 
+    // actually encrypt
+    let encryptStr = ""
+    for (const char of str) {
+        encryptStr += reverseAlpha[char] || char; // the second part is just in case not a letter (like '-' in T-bone)
+    }
 
+    return encryptStr;
 }
 
-function algo2() {
+// morse code cipher
+function algo2(str) {
 
 }
