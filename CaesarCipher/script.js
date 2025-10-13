@@ -21,20 +21,30 @@ async function fetchMeat() {
     }
     document.getElementById("formattedMeat").innerHTML = newPara;
 
-    // add to algo1 encryption para
-    let algo1Para = "";
-    for (para in meatJSON) {
-        algo1Para += '<p>' + meatJSON[para] + '</p>';
-    }
-    let cipher1Para = algo1(algo1Para);
-    document.getElementById("algo1").innerHTML = cipher1Para;
+    let algoChoice = document.getElementById("algoInput").value;
+    
+    document.getElementById("algo1").innerHTML = "";
+    document.getElementById("algo2").innerHTML = "";
 
-    let algo2Para = "";
-    for(para in meatJSON) {
-        algo2Para += "<p>" + meatJSON[para] + '</p>';
+    if (algoChoice === "Algo1") {
+         // add to algo1 encryption para
+        let algo1Para = "";
+        for (para in meatJSON) {
+            algo1Para += '<p>' + meatJSON[para] + '</p>';
+        }
+        let cipher1Para = algo1(algo1Para);
+        document.getElementById("algo1").innerHTML = cipher1Para;
+    } 
+    
+    if (algoChoice === "Algo2") {
+        // add to algo2 encryption para
+        let algo2Para = "";
+        for(para in meatJSON) {
+            algo2Para += "<p>" + meatJSON[para] + '</p>';
+        }
+        let cipher2Para = algo2(algo2Para);
+        document.getElementById("algo2").innerHTML = cipher2Para;
     }
-    let cipher2Para = algo2(algo2Para);
-    document.getElementById("algo2").innerHTML = cipher2Para;
 
     return true; // just in case
 }
@@ -70,5 +80,54 @@ function algo1(str) {
 
 // morse code cipher
 function algo2(str) {
+    str = str.replace(/<[^>]+>/g, "");
+    
+    // chatgpt made the object
+    const morse = {
+    // Letters A–Z (case-insensitive — same Morse for both)
+    A: ".-",    a: ".-",
+    B: "-...",  b: "-...",
+    C: "-.-.",  c: "-.-.",
+    D: "-..",   d: "-..",
+    E: ".",     e: ".",
+    F: "..-.",  f: "..-.",
+    G: "--.",   g: "--.",
+    H: "....",  h: "....",
+    I: "..",    i: "..",
+    J: ".---",  j: ".---",
+    K: "-.-",   k: "-.-",
+    L: ".-..",  l: ".-..",
+    M: "--",    m: "--",
+    N: "-.",    n: "-.",
+    O: "---",   o: "---",
+    P: ".--.",  p: ".--.",
+    Q: "--.-",  q: "--.-",
+    R: ".-.",   r: ".-.",
+    S: "...",   s: "...",
+    T: "-",     t: "-",
+    U: "..-",   u: "..-",
+    V: "...-",  v: "...-",
+    W: ".--",   w: ".--",
+    X: "-..-",  x: "-..-",
+    Y: "-.--",  y: "-.--",
+    Z: "--..",  z: "--..",
+    
+    // Punctuation
+    ".": ".-.-.-",
+    ",": "--..--",
+    "-": "-....-",
+    " ": "/" // space between words in Morse
+    };
+    
+    // same as prev algo
+    let encryptStr = "";
+    for (const char of str) {
+        if (morse[char]) {
+            encryptStr  += morse[char] + " ";
+        } else {
+            encryptStr += "";
+        }
+    }
 
+    return encryptStr;
 }
