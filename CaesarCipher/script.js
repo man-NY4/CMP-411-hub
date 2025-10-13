@@ -23,6 +23,7 @@ async function fetchMeat() {
 
     let algoChoice = document.getElementById("algoInput").value;
     
+    // clear the algo paras since you only choose one of them
     document.getElementById("algo1").innerHTML = "";
     document.getElementById("algo2").innerHTML = "";
 
@@ -80,11 +81,11 @@ function algo1(str) {
 
 // morse code cipher
 function algo2(str) {
-    str = str.replace(/<[^>]+>/g, "");
+    str = str.replace(/<[^>]+>/g, ""); // needed so that it doesn't also translte the <p> element
     
     // chatgpt made the object
     const morse = {
-    // Letters A–Z (case-insensitive — same Morse for both)
+    // Letters A–Z (case-insensitive — same morse code for both upper and lower)
     A: ".-",    a: ".-",
     B: "-...",  b: "-...",
     C: "-.-.",  c: "-.-.",
@@ -119,11 +120,11 @@ function algo2(str) {
     " ": "/" // space between words in Morse
     };
     
-    // same as prev algo
+    // similar to prev algo
     let encryptStr = "";
     for (const char of str) {
-        if (morse[char]) {
-            encryptStr  += morse[char] + " ";
+        if (morse[char]) { // check so that if letter in can be translated else just make it empty
+            encryptStr  += morse[char] + " "; // this is here to add a space after each letter to differentiate letters
         } else {
             encryptStr += "";
         }
