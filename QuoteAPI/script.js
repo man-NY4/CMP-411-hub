@@ -8,10 +8,10 @@ async function fetchQuote() {
         minLen = 0;
         maxLen = 30;
     } else if (qLength === "medium") {
-        minLen = 31;
+        minLen = 51;
         maxLen = 100;
     } else if (qLength === "long") {
-        minLen = 101;
+        minLen = 201;
         maxLen = 500;
     }  
 
