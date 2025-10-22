@@ -1,22 +1,31 @@
 async function fetchQuote() {
-    let meatFiller = document.getElementById("fillerInput").value; // 
-    let meatAmount = document.getElementById("meatInput").value; // 
+    const qLength = document.getElementById("lengthInput").value; // 
 
-    // gets the number into format to make it easier for later    
-    minLen = "?minLength=" + meatFiller;
-    maxLen = "&maxLength=" + meatAmount;
+    let minLen = 0;
+    let maxLen = 0;
 
-    let quoteLink = "https://api.quotable.io/quotes/random" + meatFiller + meatAmount; // get the api link
-    let newPara = ""; // make a placeholder para for the loop to get the para formatted
+    if (qLength === "short") {
+        minLen = 0;
+        maxLen = 30;
+    } else if (qLength === "medium") {
+        minLen = 31;
+        maxLen = 100;
+    } else if (qLength === "long") {
+        minLen = 101;
+        maxLen = 500;
+    }  
 
-    let meatData = await fetch(meatLink); // 
-    let meatJSON = await meatData.json(); // 
+    // gets the number into format to make it easier for later  
+    let minLink = "?minLength=" + minLen;
+    let maxLink = "&maxLength=" + maxLen;
+
+    let quoteLink = "https://api.quotable.io/quotes/random" + minLink + maxLink; // get the api link
+
+    let quoteData = await fetch(quoteLink);
+    let quoteJSON = await quoteData.json();
     
-    // add to quote format
-    for (para in meatJSON) {
-        newPara += '<p>' + meatJSON[para] + '</p>';
-    }
-    document.getElementById("formattedMeat").innerHTML = newPara;
+    document.getElementById("quote").innerHTML = quoteJSON[0].content;
+    document.getElementById("author").innerHTML = quoteJSON[0].author;
     
     return true; // just in case
 }
