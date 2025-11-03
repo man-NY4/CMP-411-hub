@@ -24,9 +24,8 @@ async function fetchNum() {
     let numPara = <HTMLElement>document.getElementById("numPara");
     numPara.innerHTML +=  num + '<br>';  
 
-
     let meanPara = <HTMLElement>document.getElementById("meanNum");
-
+    
     meanPara.innerHTML = "Mean: " + num;
 
     let medianPara = <HTMLElement>document.getElementById("medianNum");
