@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function fetchNum() {
     return __awaiter(this, void 0, void 0, function () {
-        var begRange, endRange, userNum, beg, end, num, numPara, numbers, meanPara, medianPara, modePara;
+        var begRange, endRange, userNum, beg, end, num, numPara, numbers, existingNums, i, currNum, meanPara, sum, i, mean, medianPara, modePara;
         return __generator(this, function (_a) {
             begRange = document.getElementById("begRange").value;
             endRange = document.getElementById("endRange").value;
@@ -59,10 +59,20 @@ function fetchNum() {
             numPara = document.getElementById("numPara");
             numPara.innerHTML += num + '<br>';
             numbers = [];
-            numbers.push(num);
+            existingNums = numPara.innerHTML.split('<br>');
+            for (i = 0; i < existingNums.length - 1; i++) {
+                currNum = parseInt(existingNums[i]);
+                numbers.push(currNum);
+            }
+            numbers.sort(function (a, b) { return a - b; });
             alert(numbers);
             meanPara = document.getElementById("meanNum");
-            meanPara.innerHTML = "Mean: " + num;
+            sum = 0;
+            for (i = 0; i < numbers.length; i++) {
+                sum += numbers[i];
+            }
+            mean = sum / numbers.length;
+            meanPara.innerHTML = "Mean: " + mean;
             medianPara = document.getElementById("medianNum");
             medianPara.innerHTML = "Median: " + num;
             modePara = document.getElementById("modeNum");

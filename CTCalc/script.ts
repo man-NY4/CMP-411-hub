@@ -24,15 +24,30 @@ async function fetchNum() {
     numPara.innerHTML +=  num + '<br>';
 
     let numbers: number[] = [];
-    numbers.push(num);
+    let existingNums: string[] = numPara.innerHTML.split('<br>');
+    for (let i = 0; i < existingNums.length - 1; i++) {
+        let currNum: number = parseInt(existingNums[i]);
+        numbers.push(currNum);
+    }
+
+    numbers.sort((a, b) => a - b);
     alert(numbers);
 
+    // calc mean
     let meanPara = <HTMLElement>document.getElementById("meanNum");
-    meanPara.innerHTML = "Mean: " + num;
 
+    let sum: number = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+    let mean: number = sum / numbers.length;
+    meanPara.innerHTML = "Mean: " + mean;
+
+    // calc median
     let medianPara = <HTMLElement>document.getElementById("medianNum");
     medianPara.innerHTML = "Median: " + num;
 
+    // calc mode
     let modePara = <HTMLElement>document.getElementById("modeNum");
     modePara.innerHTML = "Mode: " + num;
     
