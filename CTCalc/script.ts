@@ -12,7 +12,7 @@ async function fetchNum() {
         alert("Please enter valid numbers for the range and the number.");
         return false;
     }
-    if (beg >= end) {
+    if (beg > end) {
         alert("The beginning of the range must be less than the end.");
         return false;
     }
@@ -20,12 +20,14 @@ async function fetchNum() {
         alert("The number must be within the specified range.");
         return false;
     }
-
     let numPara = <HTMLElement>document.getElementById("numPara");
-    numPara.innerHTML +=  num + '<br>';  
+    numPara.innerHTML +=  num + '<br>';
+
+    let numbers: number[] = [];
+    numbers.push(num);
+    alert(numbers);
 
     let meanPara = <HTMLElement>document.getElementById("meanNum");
-    
     meanPara.innerHTML = "Mean: " + num;
 
     let medianPara = <HTMLElement>document.getElementById("medianNum");
@@ -34,28 +36,20 @@ async function fetchNum() {
     let modePara = <HTMLElement>document.getElementById("modeNum");
     modePara.innerHTML = "Mode: " + num;
     
-    
-
-    // // gets the number into format to make it easier for later    
-    // let begParam: string = "?min=" + begRange;
-    // let endParam: string = "&max=" + endRange;
-
-    // let numLink: string = "http://www.randomnumberapi.com/api/v1.0/random" + begParam + endParam; // get the api link
-    // let newPara: string = ""; // make a placeholder para for the loop to get the para formatted
-
-    // let numData: Response = await fetch(numLink); // fetch call
-    // let numJSON: Record<string, string> = await numData.json(); // make JSON
-
-    // // raw JSON 
-    // let numPara = <HTMLElement>document.getElementById("numPara")
-    // numPara.innerHTML = JSON.stringify(numJSON); 
-    
-    // // add to ct
-    // for (const para in numJSON) {
-    //     newPara += '<p>' + numJSON[para] + '</p>';
-    // }
-    // let ctPara = <HTMLElement>document.getElementById("medianPara");
-    // ctPara.innerHTML= newPara;
-
     return true; // just in case
+}
+
+function clearNums() {
+    let numPara = <HTMLElement>document.getElementById("numPara");
+    numPara.innerHTML = "";
+
+    let meanPara = <HTMLElement>document.getElementById("meanNum");
+    meanPara.innerHTML = "Mean: ";
+
+    let medianPara = <HTMLElement>document.getElementById("medianNum");
+    medianPara.innerHTML = "Median: ";
+
+    let modePara = <HTMLElement>document.getElementById("modeNum");
+    modePara.innerHTML = "Mode: ";
+
 }

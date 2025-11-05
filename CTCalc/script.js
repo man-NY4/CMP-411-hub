@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function fetchNum() {
     return __awaiter(this, void 0, void 0, function () {
-        var begRange, endRange, userNum, beg, end, num, numPara, meanPara, medianPara, modePara;
+        var begRange, endRange, userNum, beg, end, num, numPara, numbers, meanPara, medianPara, modePara;
         return __generator(this, function (_a) {
             begRange = document.getElementById("begRange").value;
             endRange = document.getElementById("endRange").value;
@@ -48,7 +48,7 @@ function fetchNum() {
                 alert("Please enter valid numbers for the range and the number.");
                 return [2 /*return*/, false];
             }
-            if (beg >= end) {
+            if (beg > end) {
                 alert("The beginning of the range must be less than the end.");
                 return [2 /*return*/, false];
             }
@@ -58,29 +58,26 @@ function fetchNum() {
             }
             numPara = document.getElementById("numPara");
             numPara.innerHTML += num + '<br>';
+            numbers = [];
+            numbers.push(num);
+            alert(numbers);
             meanPara = document.getElementById("meanNum");
             meanPara.innerHTML = "Mean: " + num;
             medianPara = document.getElementById("medianNum");
             medianPara.innerHTML = "Median: " + num;
             modePara = document.getElementById("modeNum");
             modePara.innerHTML = "Mode: " + num;
-            // // gets the number into format to make it easier for later    
-            // let begParam: string = "?min=" + begRange;
-            // let endParam: string = "&max=" + endRange;
-            // let numLink: string = "http://www.randomnumberapi.com/api/v1.0/random" + begParam + endParam; // get the api link
-            // let newPara: string = ""; // make a placeholder para for the loop to get the para formatted
-            // let numData: Response = await fetch(numLink); // fetch call
-            // let numJSON: Record<string, string> = await numData.json(); // make JSON
-            // // raw JSON 
-            // let numPara = <HTMLElement>document.getElementById("numPara")
-            // numPara.innerHTML = JSON.stringify(numJSON); 
-            // // add to ct
-            // for (const para in numJSON) {
-            //     newPara += '<p>' + numJSON[para] + '</p>';
-            // }
-            // let ctPara = <HTMLElement>document.getElementById("medianPara");
-            // ctPara.innerHTML= newPara;
             return [2 /*return*/, true]; // just in case
         });
     });
+}
+function clearNums() {
+    var numPara = document.getElementById("numPara");
+    numPara.innerHTML = "";
+    var meanPara = document.getElementById("meanNum");
+    meanPara.innerHTML = "Mean: ";
+    var medianPara = document.getElementById("medianNum");
+    medianPara.innerHTML = "Median: ";
+    var modePara = document.getElementById("modeNum");
+    modePara.innerHTML = "Mode: ";
 }
