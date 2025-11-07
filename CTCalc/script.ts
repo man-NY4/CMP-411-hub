@@ -35,7 +35,6 @@ async function fetchNum() {
 
     // calc mean
     let meanPara = <HTMLElement>document.getElementById("meanNum");
-
     let sum: number = 0;
     for (let i = 0; i < numbers.length; i++) {
         sum += numbers[i];
@@ -45,12 +44,16 @@ async function fetchNum() {
 
     // calc median
     let medianPara = <HTMLElement>document.getElementById("medianNum");
-    medianPara.innerHTML = "Median: " + num;
+    let median: number = 0;
+    if (numbers.length % 2 === 0) {
+        let mid1: number = numbers[(numbers.length / 2) - 1];
+        let mid2: number = numbers[numbers.length / 2];
+        median = (mid1 + mid2) / 2;
+    } else {
+        median = numbers[Math.floor(numbers.length / 2)];
+    }
+    medianPara.innerHTML = "Median: " + median;
 
-    // calc mode
-    let modePara = <HTMLElement>document.getElementById("modeNum");
-    modePara.innerHTML = "Mode: " + num;
-    
     return true; // just in case
 }
 
@@ -63,8 +66,4 @@ function clearNums() {
 
     let medianPara = <HTMLElement>document.getElementById("medianNum");
     medianPara.innerHTML = "Median: ";
-
-    let modePara = <HTMLElement>document.getElementById("modeNum");
-    modePara.innerHTML = "Mode: ";
-
 }

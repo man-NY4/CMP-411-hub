@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function fetchNum() {
     return __awaiter(this, void 0, void 0, function () {
-        var begRange, endRange, userNum, beg, end, num, numPara, numbers, existingNums, i, currNum, meanPara, sum, i, mean, medianPara, modePara;
+        var begRange, endRange, userNum, beg, end, num, numPara, numbers, existingNums, i, currNum, meanPara, sum, i, mean, medianPara, median, mid1, mid2;
         return __generator(this, function (_a) {
             begRange = document.getElementById("begRange").value;
             endRange = document.getElementById("endRange").value;
@@ -74,9 +74,16 @@ function fetchNum() {
             mean = sum / numbers.length;
             meanPara.innerHTML = "Mean: " + mean;
             medianPara = document.getElementById("medianNum");
-            medianPara.innerHTML = "Median: " + num;
-            modePara = document.getElementById("modeNum");
-            modePara.innerHTML = "Mode: " + num;
+            median = 0;
+            if (numbers.length % 2 === 0) {
+                mid1 = numbers[(numbers.length / 2) - 1];
+                mid2 = numbers[numbers.length / 2];
+                median = (mid1 + mid2) / 2;
+            }
+            else {
+                median = numbers[Math.floor(numbers.length / 2)];
+            }
+            medianPara.innerHTML = "Median: " + median;
             return [2 /*return*/, true]; // just in case
         });
     });
@@ -88,6 +95,4 @@ function clearNums() {
     meanPara.innerHTML = "Mean: ";
     var medianPara = document.getElementById("medianNum");
     medianPara.innerHTML = "Median: ";
-    var modePara = document.getElementById("modeNum");
-    modePara.innerHTML = "Mode: ";
 }
