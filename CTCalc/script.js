@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function fetchNum() {
     return __awaiter(this, void 0, void 0, function () {
-        var begRange, endRange, userNum, beg, end, num, numPara, numbers, existingNums, i, currNum, meanPara, sum, i, mean, medianPara, median, mid1, mid2;
-        return __generator(this, function (_a) {
+        var begRange, endRange, userNum, beg, end, num, numPara, numbers, existingNums, i, currNum, meanPara, sum, i, mean, medianPara, median, mid1, mid2, modePara, modeMap, modeArr, maxCount, mode, _i, _a, n, freq;
+        return __generator(this, function (_b) {
             begRange = document.getElementById("begRange").value;
             endRange = document.getElementById("endRange").value;
             userNum = document.getElementById("numInput").value;
@@ -84,6 +84,26 @@ function fetchNum() {
                 median = numbers[Math.floor(numbers.length / 2)];
             }
             medianPara.innerHTML = "Median: " + median;
+            modePara = document.getElementById("modeNum");
+            modeMap = {};
+            modeArr = numbers;
+            maxCount = 0;
+            mode = [];
+            modeArr.forEach(function (n) {
+                modeMap[n] = (modeMap[n] || 0) + 1;
+            });
+            for (_i = 0, _a = Object.keys(modeMap).map(Number); _i < _a.length; _i++) {
+                n = _a[_i];
+                freq = modeMap[n] || 0;
+                if (freq > maxCount) {
+                    maxCount = freq;
+                    mode = [n];
+                }
+                else if (freq === maxCount) {
+                    mode.push(n);
+                }
+            }
+            modePara.innerHTML = "Mode: " + mode;
             return [2 /*return*/, true]; // just in case
         });
     });

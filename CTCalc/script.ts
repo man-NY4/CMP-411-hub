@@ -54,6 +54,28 @@ async function fetchNum() {
     }
     medianPara.innerHTML = "Median: " + median;
 
+    // calc mode
+    let modePara = <HTMLElement>document.getElementById("modeNum");
+    let modeMap: Record<number, number> = {};
+    let modeArr: number[] = numbers;
+    let maxCount: number = 0;
+    let mode: number[] = [];
+
+    modeArr.forEach((n) => {
+        modeMap[n] = (modeMap[n] || 0) + 1;
+    });
+
+    for (const n of Object.keys(modeMap).map(Number)) {
+        const freq = modeMap[n] || 0;
+        if (freq > maxCount) {
+            maxCount = freq;
+            mode = [n];
+        } else if (freq === maxCount) {
+            mode.push(n);
+        }
+    }
+    modePara.innerHTML = "Mode: " + mode;
+
     return true; // just in case
 }
 
