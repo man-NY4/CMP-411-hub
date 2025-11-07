@@ -115,4 +115,6 @@ function clearNums() {
     meanPara.innerHTML = "Mean: ";
     var medianPara = document.getElementById("medianNum");
     medianPara.innerHTML = "Median: ";
+    var modePara = document.getElementById("modeNum");
+    modePara.innerHTML = "Mode: ";
 }

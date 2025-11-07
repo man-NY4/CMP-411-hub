@@ -88,4 +88,7 @@ function clearNums() {
 
     let medianPara = <HTMLElement>document.getElementById("medianNum");
     medianPara.innerHTML = "Median: ";
+
+    let modePara = <HTMLElement>document.getElementById("modeNum");
+    modePara.innerHTML = "Mode: ";
 }
