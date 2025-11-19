@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capstone Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <h1>Tetrio API Frontend</h1>
+  
+  <div class="flex-container">
+    <!-- Cell 1: Form -->
+    <div class="cell">
+      <h2>Form to get data</h2>
+        <form id ="tetrioForm">
+
+            <label for="wordInput">Choose leaderboard:</label>
+            <select id = "leaderboard" name = "leaderboard">
+                <option value="league">TETRA LEAGUE</option>
+                <option value="xp">XP</option>
+                <option value="ar">Achievement Rating</option>
+            </select>
+            <br><br>
+
+          <input type="button" value="Fetch the leaderboard" onclick="fetchTETRIO()">
+        </form>
+    </div>
+
+    <!-- Cell 2: Para 1 -->
+    <div class="cell">
+      <h2>Leaderboard</h2>
+        <p id = "leaderboardPara">
+        </p>
+    </div>
+
+</body>
+</html>
