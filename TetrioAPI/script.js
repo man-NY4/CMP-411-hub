@@ -36,15 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function fetchTETRIO() {
     return __awaiter(this, void 0, void 0, function () {
-        var leaderboardChoice, leaderboardType, tetrioLink, proxy, url, leaderboardData, leaderboardJSON, leaderboard;
+        var leaderboardChoice, leaderboardType, tetrioLink, url, leaderboardData, leaderboardJSON, leaderboard;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     leaderboardChoice = document.getElementById("leaderboard").value;
                     leaderboardType = "users/by/" + leaderboardChoice;
                     tetrioLink = "https://ch.tetr.io/api/" + leaderboardType;
-                    proxy = "https://corsproxy.io/?";
-                    url = proxy + encodeURIComponent(tetrioLink);
+                    url = "https://api.allorigins.win/raw?url=".concat(encodeURIComponent(tetrioLink));
                     return [4 /*yield*/, fetch(url)];
                 case 1:
                     leaderboardData = _a.sent();

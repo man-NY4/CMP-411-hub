@@ -4,12 +4,10 @@ async function fetchTETRIO() {
     // gets the leaderboard into format to make it easier for later    
     let leaderboardType: string = "users/by/" + leaderboardChoice;
 
-    
-
     let tetrioLink: string = "https://ch.tetr.io/api/" + leaderboardType; // get the api link
     
-    let proxy = "https://corsproxy.io/?";
-    let url = proxy + encodeURIComponent(tetrioLink);
+    let url = `https://api.allorigins.win/raw?url=${encodeURIComponent(tetrioLink)}`;
+
 
     let leaderboardData: Response = await fetch(url);
 
