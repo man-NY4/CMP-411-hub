@@ -11,9 +11,10 @@
   <h1>Tetrio API Frontend</h1>
   
   <div class="flex-container">
-    <!-- Cell 1: Form -->
+
+    <!-- Cell 1: Leaderboard Form -->
     <div class="cell">
-      <h2>Form to get data</h2>
+      <h2>Leaderboard Form</h2>
         <form id ="tetrioForm">
 
             <label for="wordInput">Choose leaderboard:</label>
@@ -28,12 +29,42 @@
         </form>
     </div>
 
-    <!-- Cell 2: Para 1 -->
+    <!-- Cell 2: Leaderboard -->
     <div class="cell">
       <h2>Leaderboard</h2>
         <p id = "leaderboardPara">
         </p>
     </div>
+
+    <!-- Cell 3: User Summary Form -->
+    <div class="cell">
+      <h2>User Summary Form</h2>
+        <form id ="userForm">
+
+            <label for="wordInput">Enter Tetrio username:</label>
+            <input type="text" id="username" name="username" required>
+            <br><br>
+
+            <label for="wordInput">Choose summary to display:</label>
+            <select id = "summaryType" name = "summaryType">
+                <option value="40l">40 Lines</option>
+                <option value="blitz">Blitz</option>
+                <option value="zenith">Quickplay</option>
+            </select>
+            <br><br>
+
+          <input type="button" value="Fetch user info" onclick="fetchUser()">
+        </form>
+    </div>
+    
+    <!-- Cell 4: User Summary -->
+    <div class="cell">
+      <h2>User Summary</h2>
+        <p id = "userPara">
+        </p>
+    </div>
+
+  </div>
 
 </body>
 </html>

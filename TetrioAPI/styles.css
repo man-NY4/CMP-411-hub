@@ -21,7 +21,7 @@ h1 {
   padding: 20px;
   flex: 1 1 200px; /* flexible sizing */
   text-align: center;
-  max-width: 300px;
+  max-width: 600px;
 }
 
 /* Large screens: 4 in one row */
