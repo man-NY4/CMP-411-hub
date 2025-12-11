@@ -24,16 +24,18 @@ async function fetchTETRIO() {
                 <th style="border: 2px solid black; padding: 2px;">Score</th>
             </tr>`;
     users.forEach((user, index) => {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         let valueToShow = "N/A";
         if (leaderboardChoice === "league") {
-            valueToShow = (_b = (_a = user.league) === null || _a === void 0 ? void 0 : _a.rank) !== null && _b !== void 0 ? _b : "N/A";
+            const rank = (_b = (_a = user.league) === null || _a === void 0 ? void 0 : _a.rank) !== null && _b !== void 0 ? _b : "N/A";
+            const tr = ((_c = user.league) === null || _c === void 0 ? void 0 : _c.tr) != null ? Number(user.league.tr).toFixed(2) : "N/A";
+            valueToShow = `${rank} (${tr})`; // Show rank and TR together
         }
         else if (leaderboardChoice === "xp") {
-            valueToShow = (_c = user.xp) !== null && _c !== void 0 ? _c : "N/A";
+            valueToShow = (_d = user.xp) !== null && _d !== void 0 ? _d : "N/A";
         }
         else if (leaderboardChoice === "ar") {
-            valueToShow = (_d = user.ar) !== null && _d !== void 0 ? _d : "N/A";
+            valueToShow = (_e = user.ar) !== null && _e !== void 0 ? _e : "N/A";
         }
         htmlTable +=
             `<tr>
@@ -48,7 +50,7 @@ async function fetchTETRIO() {
     leaderboard.innerHTML = htmlTable;
 }
 async function fetchUser() {
-    var _a, _b, _c;
+    var _a, _b, _c, _d, _e, _f;
     const userName = document.getElementById("username").value;
     if (!userName) {
         alert("Please enter a username");
@@ -92,8 +94,7 @@ async function fetchUser() {
             `<strong>40 Lines Summary:</strong><br>
             Time: ${formatTime(getFinalTime())}<br>
             PPS: ${formatPPS(getPPS())}<br>
-            Pieces: ${getPieces()}<br>
-            Lines: ${getLines()}<br>`;
+            Pieces: ${getPieces()}<br>`;
     }
     else if (summaryChoice === "blitz") {
         summaryHTML +=
@@ -105,9 +106,11 @@ async function fetchUser() {
             Pieces: ${getPieces()}<br>`;
     }
     else if (summaryChoice === "zenith") {
+        const altitude = ((_f = (_e = (_d = record.results) === null || _d === void 0 ? void 0 : _d.stats) === null || _e === void 0 ? void 0 : _e.zenith) === null || _f === void 0 ? void 0 : _f.altitude) != null ? Number(record.results.stats.zenith.altitude).toFixed(2) : "N/A";
         summaryHTML +=
             `<strong>Quickplay Summary:</strong><br>
             Score: ${getScore()}<br>
+            Altitude: ${altitude} m<br>
             Time: ${formatTime(getFinalTime())}<br>
             Lines Cleared: ${getLines()}<br>
             PPS: ${formatPPS(getPPS())}<br>

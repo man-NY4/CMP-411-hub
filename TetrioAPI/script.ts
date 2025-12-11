@@ -1,4 +1,4 @@
-async function fetchTETRIO() {
+async function fetchTETRIO() { // need to use "tsc script.ts --target es2017 --lib es2017,dom" to compile
     const leaderboardChoice = (<HTMLInputElement>document.getElementById("leaderboard")).value;
 
     // gets the leaderboard into format to make it easier for later    
@@ -34,7 +34,9 @@ async function fetchTETRIO() {
         let valueToShow: string | number = "N/A";
 
         if (leaderboardChoice === "league") {
-            valueToShow = user.league?.rank ?? "N/A";
+            const rank = user.league?.rank ?? "N/A";
+            const tr = user.league?.tr != null ? Number(user.league.tr).toFixed(2) : "N/A";
+            valueToShow = `${rank} (${tr})`; // Show rank and TR together
         } else if (leaderboardChoice === "xp") {
             valueToShow = user.xp ?? "N/A";
         } else if (leaderboardChoice === "ar") {
@@ -110,8 +112,7 @@ async function fetchUser() {
             `<strong>40 Lines Summary:</strong><br>
             Time: ${formatTime(getFinalTime())}<br>
             PPS: ${formatPPS(getPPS())}<br>
-            Pieces: ${getPieces()}<br>
-            Lines: ${getLines()}<br>`;
+            Pieces: ${getPieces()}<br>`;
     } else if (summaryChoice === "blitz") {
         summaryHTML +=
             `<strong>Blitz Summary:</strong><br>
@@ -121,9 +122,12 @@ async function fetchUser() {
             PPS: ${formatPPS(getPPS())}<br>
             Pieces: ${getPieces()}<br>`;
     } else if (summaryChoice === "zenith") {
+        const altitude = record.results?.stats?.zenith?.altitude != null ? Number(record.results.stats.zenith.altitude).toFixed(2) : "N/A";
+
         summaryHTML +=
             `<strong>Quickplay Summary:</strong><br>
             Score: ${getScore()}<br>
+            Altitude: ${altitude} m<br>
             Time: ${formatTime(getFinalTime())}<br>
             Lines Cleared: ${getLines()}<br>
             PPS: ${formatPPS(getPPS())}<br>

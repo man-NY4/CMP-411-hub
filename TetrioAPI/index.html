@@ -1,70 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="auto">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capstone Project</title>
+  <title>Tetrio API Frontend</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js"></script>
+
+  <!-- Your JS -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <h1>Tetrio API Frontend</h1>
-  
-  <div class="flex-container">
 
-    <!-- Cell 1: Leaderboard Form -->
-    <div class="cell">
-      <h2>Leaderboard Form</h2>
-        <form id ="tetrioForm">
+  <div class="container py-4">
 
-            <label for="wordInput">Choose leaderboard:</label>
-            <select id = "leaderboard" name = "leaderboard">
+    <!-- Header -->
+    <header class="pb-3 mb-4 border-bottom">
+      <h1 class="display-5 fw-bold text-center">Tetrio API Frontend</h1>
+    </header>
+
+    <!-- Main leaderboard panel -->
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3 shadow-sm">
+      <h2 class="fw-bold">Leaderboard</h2>
+      <p id="leaderboardPara" class="fs-5">
+        <!-- Leaderboard content will appear here -->
+      </p>
+    </div>
+
+    <!-- Bottom row: forms and user summary -->
+    <div class="row g-4">
+
+      <!-- Left: Forms -->
+      <div class="col-md-6">
+        <div class="h-100 p-4 bg-light rounded-3 shadow-sm">
+
+          <!-- Leaderboard Form -->
+          <h3>Leaderboard Form</h3>
+          <form id="tetrioForm" class="mb-4">
+            <div class="mb-3">
+              <label for="leaderboard" class="form-label">Choose leaderboard:</label>
+              <select id="leaderboard" name="leaderboard" class="form-select">
                 <option value="league">TETRA LEAGUE</option>
                 <option value="xp">XP</option>
                 <option value="ar">Achievement Rating</option>
-            </select>
-            <br><br>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="fetchTETRIO()">Fetch the leaderboard</button>
+          </form>
 
-          <input type="button" value="Fetch the leaderboard" onclick="fetchTETRIO()">
-        </form>
-    </div>
-
-    <!-- Cell 2: Leaderboard -->
-    <div class="cell">
-      <h2>Leaderboard</h2>
-        <p id = "leaderboardPara">
-        </p>
-    </div>
-
-    <!-- Cell 3: User Summary Form -->
-    <div class="cell">
-      <h2>User Summary Form</h2>
-        <form id ="userForm">
-
-            <label for="wordInput">Enter Tetrio username:</label>
-            <input type="text" id="username" name="username" required>
-            <br><br>
-
-            <label for="wordInput">Choose summary to display:</label>
-            <select id = "summaryType" name = "summaryType">
+          <!-- User Summary Form -->
+          <h3>User Summary Form</h3>
+          <form id="userForm">
+            <div class="mb-3">
+              <label for="username" class="form-label">Enter Tetrio username:</label>
+              <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="summaryType" class="form-label">Choose summary to display:</label>
+              <select id="summaryType" name="summaryType" class="form-select">
                 <option value="40l">40 Lines</option>
                 <option value="blitz">Blitz</option>
                 <option value="zenith">Quickplay</option>
-            </select>
-            <br><br>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="fetchUser()">Fetch user info</button>
+          </form>
 
-          <input type="button" value="Fetch user info" onclick="fetchUser()">
-        </form>
+        </div>
+      </div>
+
+      <!-- Right: User Summary -->
+      <div class="col-md-6">
+        <div class="h-100 p-4 bg-light rounded-3 shadow-sm">
+          <h3>User Summary</h3>
+          <p id="userPara" class="fs-5">
+            <!-- User summary content will appear here -->
+          </p>
+        </div>
+      </div>
+
     </div>
-    
-    <!-- Cell 4: User Summary -->
-    <div class="cell">
-      <h2>User Summary</h2>
-        <p id = "userPara">
-        </p>
-    </div>
+
+    <footer class="pt-3 mt-4 text-body-secondary border-top text-center">
+      &copy; 2025
+    </footer>
 
   </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
