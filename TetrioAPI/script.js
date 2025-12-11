@@ -48,8 +48,12 @@ async function fetchTETRIO() {
     leaderboard.innerHTML = htmlTable;
 }
 async function fetchUser() {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+    var _a, _b, _c;
     const userName = document.getElementById("username").value;
+    if (!userName) {
+        alert("Please enter a username");
+        return false;
+    }
     const summaryChoice = document.getElementById("summaryType").value;
     // put username and summary type into format to make it easier for later
     const userType = "users/" + userName + "/summaries/" + summaryChoice;
@@ -62,38 +66,69 @@ async function fetchUser() {
         userSummary.innerHTML = "Could not load user data";
         return;
     }
-    const summary = userData.data; // summary data
-    // format the summary data into readable HTML
+    const record = userData.data.record; // summary data
+    const rank = userData.data.rank; // user rank is separate in the json
+    if (!record) {
+        userSummary.innerHTML = "No summary data available for this user.";
+        return;
+    }
+    // results usually split into .aggregatestats and .stats
+    const results = (_a = record.results) !== null && _a !== void 0 ? _a : {};
+    const agg = (_b = results.aggregatestats) !== null && _b !== void 0 ? _b : {};
+    const stats = (_c = results.stats) !== null && _c !== void 0 ? _c : {};
+    // helper safe getters
+    const getScore = () => { var _a, _b, _c; return (_c = (_b = (_a = stats.score) !== null && _a !== void 0 ? _a : agg.vsscore) !== null && _b !== void 0 ? _b : record.score) !== null && _c !== void 0 ? _c : "N/A"; };
+    const getPPS = () => { var _a, _b; return (_b = (_a = agg.pps) !== null && _a !== void 0 ? _a : stats.pps) !== null && _b !== void 0 ? _b : "N/A"; };
+    const getFinalTime = () => { var _a, _b, _c; return (_c = (_b = (_a = stats.finaltime) !== null && _a !== void 0 ? _a : agg.finaltime) !== null && _b !== void 0 ? _b : record.finaltime) !== null && _c !== void 0 ? _c : "N/A"; };
+    const getPieces = () => { var _a, _b; return (_b = (_a = stats.piecesplaced) !== null && _a !== void 0 ? _a : record.piecesplaced) !== null && _b !== void 0 ? _b : "N/A"; };
+    const getLines = () => { var _a, _b; return (_b = (_a = stats.lines) !== null && _a !== void 0 ? _a : record.lines) !== null && _b !== void 0 ? _b : "N/A"; };
+    const getLevel = () => { var _a, _b; return (_b = (_a = stats.level) !== null && _a !== void 0 ? _a : record.level) !== null && _b !== void 0 ? _b : "N/A"; };
+    const getKills = () => { var _a, _b; return (_b = (_a = stats.kills) !== null && _a !== void 0 ? _a : record.kills) !== null && _b !== void 0 ? _b : "N/A"; };
+    // getting the summary into readable format
     let summaryHTML = `<strong>User: </strong>${userName}<br><br>`;
+    summaryHTML += `<strong>Rank:</strong> ${rank}<br><br>`;
     if (summaryChoice === "40l") {
         summaryHTML +=
             `<strong>40 Lines Summary:</strong><br>
-            Score: ${(_a = summary.score) !== null && _a !== void 0 ? _a : "N/A"}<br>
-            Time: ${(_b = summary.finaltime) !== null && _b !== void 0 ? _b : "N/A"} seconds<br>
-            PPS: ${(_c = summary.pps) !== null && _c !== void 0 ? _c : "N/A"}<br>
-            Pieces: ${(_d = summary.piecesplaced) !== null && _d !== void 0 ? _d : "N/A"}<br>
-            Rank: ${(_e = summary.rank) !== null && _e !== void 0 ? _e : "N/A"}<br>`;
+            Time: ${formatTime(getFinalTime())}<br>
+            PPS: ${formatPPS(getPPS())}<br>
+            Pieces: ${getPieces()}<br>
+            Lines: ${getLines()}<br>`;
     }
     else if (summaryChoice === "blitz") {
         summaryHTML +=
             `<strong>Blitz Summary:</strong><br>
-            Score: ${(_f = summary.score) !== null && _f !== void 0 ? _f : "N/A"}<br>
-            Lines Cleared: ${(_g = summary.lines) !== null && _g !== void 0 ? _g : "N/A"}<br>
-            Level: ${(_h = summary.level) !== null && _h !== void 0 ? _h : "N/A"}<br>
-            PPS: ${(_j = summary.pps) !== null && _j !== void 0 ? _j : "N/A"}<br>
-            Pieces: ${(_k = summary.piecesplaced) !== null && _k !== void 0 ? _k : "N/A"}<br>
-            Rank: ${(_l = summary.rank) !== null && _l !== void 0 ? _l : "N/A"}<br>`;
+            Score: ${getScore()}<br>
+            Lines Cleared: ${getLines()}<br>
+            Level: ${getLevel()}<br>
+            PPS: ${formatPPS(getPPS())}<br>
+            Pieces: ${getPieces()}<br>`;
     }
     else if (summaryChoice === "zenith") {
         summaryHTML +=
             `<strong>Quickplay Summary:</strong><br>
-            Score: ${(_m = summary.score) !== null && _m !== void 0 ? _m : "N/A"}<br>
-            Time: ${(_o = summary.finaltime) !== null && _o !== void 0 ? _o : "N/A"} seconds<br>
-            Lines Cleared: ${(_p = summary.lines) !== null && _p !== void 0 ? _p : "N/A"}<br>
-            PPS: ${(_q = summary.pps) !== null && _q !== void 0 ? _q : "N/A"}<br>
-            Pieces: ${(_r = summary.piecesplaced) !== null && _r !== void 0 ? _r : "N/A"}<br>
-            Kills: ${(_s = summary.kills) !== null && _s !== void 0 ? _s : "N/A"}<br>
-            Rank: ${(_t = summary.rank) !== null && _t !== void 0 ? _t : "N/A"}<br>`;
+            Score: ${getScore()}<br>
+            Time: ${formatTime(getFinalTime())}<br>
+            Lines Cleared: ${getLines()}<br>
+            PPS: ${formatPPS(getPPS())}<br>
+            Pieces: ${getPieces()}<br>
+            Kills: ${getKills()}<br>`;
     }
     userSummary.innerHTML = summaryHTML;
+}
+function formatTime(ms) {
+    if (ms == null || isNaN(Number(ms)))
+        return "N/A";
+    ms = Number(ms);
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    const millis = ms % 1000;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}.${millis
+        .toString()
+        .padStart(3, "0")}`;
+}
+function formatPPS(pps) {
+    if (pps == null || isNaN(Number(pps)))
+        return "N/A";
+    return Number(pps).toFixed(2);
 }

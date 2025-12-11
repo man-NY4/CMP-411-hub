@@ -58,6 +58,10 @@ async function fetchTETRIO() {
 
 async function fetchUser() {
     const userName = (<HTMLInputElement>document.getElementById("username")).value;
+    if (!userName) {
+        alert("Please enter a username");
+        return false;
+    }
     const summaryChoice = (<HTMLInputElement>document.getElementById("summaryType")).value;
 
     // put username and summary type into format to make it easier for later
@@ -75,38 +79,75 @@ async function fetchUser() {
         return;
     }
 
-    const summary = userData.data; // summary data
+    const record = userData.data.record; // summary data
+    const rank = userData.data.rank; // user rank is separate in the json
 
-    // format the summary data into readable HTML
+    if (!record) {
+        userSummary.innerHTML = "No summary data available for this user.";
+        return;
+    }
+
+    // results usually split into .aggregatestats and .stats
+    const results = record.results ?? {};
+    const agg = results.aggregatestats ?? {};
+    const stats = results.stats ?? {};
+
+    // helper safe getters
+    const getScore = () => stats.score ?? agg.vsscore ?? record.score ?? "N/A";
+    const getPPS = () => agg.pps ?? stats.pps ?? "N/A";
+    const getFinalTime = () => stats.finaltime ?? agg.finaltime ?? record.finaltime ?? "N/A";
+    const getPieces = () => stats.piecesplaced ?? record.piecesplaced ?? "N/A";
+    const getLines = () => stats.lines ?? record.lines ?? "N/A";
+    const getLevel = () => stats.level ?? record.level ?? "N/A";
+    const getKills = () => stats.kills ?? record.kills ?? "N/A";
+
+    // getting the summary into readable format
     let summaryHTML = `<strong>User: </strong>${userName}<br><br>`;
+    summaryHTML += `<strong>Rank:</strong> ${rank}<br><br>`;
 
     if (summaryChoice === "40l") {
         summaryHTML +=
             `<strong>40 Lines Summary:</strong><br>
-            Score: ${summary.score ?? "N/A"}<br>
-            Time: ${summary.finaltime ?? "N/A"} seconds<br>
-            PPS: ${summary.pps ?? "N/A"}<br>
-            Pieces: ${summary.piecesplaced ?? "N/A"}<br>
-            Rank: ${summary.rank ?? "N/A"}<br>`;
+            Time: ${formatTime(getFinalTime())}<br>
+            PPS: ${formatPPS(getPPS())}<br>
+            Pieces: ${getPieces()}<br>
+            Lines: ${getLines()}<br>`;
     } else if (summaryChoice === "blitz") {
-        summaryHTML += 
+        summaryHTML +=
             `<strong>Blitz Summary:</strong><br>
-            Score: ${summary.score ?? "N/A"}<br>
-            Lines Cleared: ${summary.lines ?? "N/A"}<br>
-            Level: ${summary.level ?? "N/A"}<br>
-            PPS: ${summary.pps ?? "N/A"}<br>
-            Pieces: ${summary.piecesplaced ?? "N/A"}<br>
-            Rank: ${summary.rank ?? "N/A"}<br>`;
+            Score: ${getScore()}<br>
+            Lines Cleared: ${getLines()}<br>
+            Level: ${getLevel()}<br>
+            PPS: ${formatPPS(getPPS())}<br>
+            Pieces: ${getPieces()}<br>`;
     } else if (summaryChoice === "zenith") {
         summaryHTML +=
             `<strong>Quickplay Summary:</strong><br>
-            Score: ${summary.score ?? "N/A"}<br>
-            Time: ${summary.finaltime ?? "N/A"} seconds<br>
-            Lines Cleared: ${summary.lines ?? "N/A"}<br>
-            PPS: ${summary.pps ?? "N/A"}<br>
-            Pieces: ${summary.piecesplaced ?? "N/A"}<br>
-            Kills: ${summary.kills ?? "N/A"}<br>
-            Rank: ${summary.rank ?? "N/A"}<br>`;
-    }
+            Score: ${getScore()}<br>
+            Time: ${formatTime(getFinalTime())}<br>
+            Lines Cleared: ${getLines()}<br>
+            PPS: ${formatPPS(getPPS())}<br>
+            Pieces: ${getPieces()}<br>
+            Kills: ${getKills()}<br>`;
+    } 
     userSummary.innerHTML = summaryHTML;
+}
+
+function formatTime(ms: number | string | null | undefined): string {
+    if (ms == null || isNaN(Number(ms))) return "N/A";
+
+    ms = Number(ms);
+
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    const millis  = ms % 1000;
+
+    return `${minutes}:${seconds.toString().padStart(2, "0")}.${millis
+        .toString()
+        .padStart(3, "0")}`;
+}
+
+function formatPPS(pps: number | string | null | undefined): string {
+    if (pps == null || isNaN(Number(pps))) return "N/A";
+    return Number(pps).toFixed(2);
 }
